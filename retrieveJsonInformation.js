@@ -1,28 +1,9 @@
-// Sandbox for collecting images without raising exceptions.
-function tryAddImage(jsonObject){
-  try{
-    const args = Array.prototype.slice.call(argument, 1);
-    let queryHook = jsonObject;
-    for (key in args){
-      queryHook = queryhook[key];
-    }
-    console.log(queryhook);
-    console.log("happy path");
-    $('#product_images').append(
-      `<img style="width:25%" `
-      + `src="${jsonObject}" alt="Bild der Verpackung"/>`
-    );
-  }
-  catch(error){
-    $('#product_images').append(`<span>Kein Bild vorhanden. </span>`);
-  }
-}
-
 var EAN = 4056489009207;
 $('#EAN').change(function() { window.EAN = this.value;});
 
 async function getFoodInformation(){
   window.EAN = document.getElementById("EAN").value;
+  window.EAN = window.EAN.trim();
   let URL = `https://world.openfoodfacts.org/api/v3/product/${window.EAN}.json`;
   let foodJson = await loadJson(URL);
   
@@ -56,20 +37,31 @@ async function getFoodInformation(){
     productHtml += "</ul>";
     $("#information").html(productHtml);
   }
-  
   // images from DE database
+  $('#product_images').html("");
+
+  // Front image
   try{
-    $('#product_images').html("");
-    tryAddImage(imageHook["front"]["displa88y"]["de"]);
-    /*$('#product_images').html(`<img style="width:25%" `
-      + `src="${}" alt="Bild der Verpackung"/>`
-      + `<img style="width:25%" `
-      + `src="${imageHook["ingredients"]["display"]["de"]}" alt="Bild der Verpackung"/>`
-      + `<img style="width:25%" `
-      + `src="${imageHook["nutrition"]["display"]["de"]}" alt="Bild der Verpackung"/>`*/
-    //);
+    $('#product_images').append(`<img style="width:25%" `
+    + `src="${imageHook["front"]["display"]["de"]}" alt="Bild der Verpackung"/>`);
   }
   catch(error){
-    $('#product_images').html("<p>Keine Bilder.</p>");
+    $('#product_images').append(`<span class="img-lost">Foto der Vorderseite fehlt.</span>`);
+  }
+  // Ingredients
+  try{
+    $('#product_images').append(`<img style="width:25%" `
+    + `src="${imageHook["ingredients"]["display"]["de"]}" alt="Bild der Verpackung"/>`);
+  }
+  catch(error){
+    $('#product_images').append(`<span class="img-lost">Foto der Zutatenliste fehlt.</span>`);
+  }
+  // Nutrition image
+  try{
+    $('#product_images').append(`<img style="width:25%" `
+    + `src="${imageHook["nutrition"]["display"]["de"]}" alt="Bild der Verpackung"/>`);
+  }
+  catch(error){
+    $('#product_images').append(`<span class="img-lost">Kein Foto einer Nährwerttabelle.</span>`);
   }
 }
