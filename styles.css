@@ -1,0 +1,42 @@
+ /* Small screen / tablet / 760px to 991px */
+@media (max-width: 991px) {
+  font-size:2em;
+}
+
+/* Smaller screen / tablet+phone / 480px to 759px */
+@media (max-width: 759px) {
+  font-size:2em;
+}
+
+/* Extra small screen / smartphone / 280px to 479px */
+@media (max-width: 479px) {
+  font-size:2em;
+}
+/* Font for all */
+/**{font-family:Aptos,sans-serif}*/
+*{font-family: Bierstadt, Tahoma, Helvetica, sans-serif;}
+
+div {
+      padding-top:1em;
+      padding-bottom:1em;
+}
+button, img, .img-lost{
+  margin-left:1em;
+}
+input{
+  margin-right:1em;
+}
+.welcome {
+  background-color: indianred;
+}
+.food{
+  background-color: papayawhip;
+}
+.nutriments, .listofnumbers {
+  font-style:italic;
+  font-size: 12px;
+  column-count: 3;
+}
+.forest{
+  background-color:forestgreen;
+}
