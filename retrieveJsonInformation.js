@@ -8,6 +8,8 @@ async function getFoodInformation(){
   let foodJson = await loadJson(URL);
   
   // list of product information
+  // fallback if article doesn't exist or no German name given
+  let productTitle = "<h3><em>Ohne Namen</em></h3>";
   let productHtml = "<ul>";
   let hook = null;
   let imageHook = null;
@@ -19,7 +21,7 @@ async function getFoodInformation(){
     else{
       $("#imageTakenMyself").html(`&nbsp;`);
     }
-    $("#product_name").html(`<h3>${hook["product_name_de"]}</h3>` );
+    productTitle = `<h3>${hook["product_name_de"]}</h3>`;
     productHtml += `<li>${hook["serving_size"]} ${hook["serving_quantity"]}</li>`;
     let nutri = `<details><summary>Nährwerte:</summary><p class = "nutriments">`;
     for(let x in hook["nutriments"]){
@@ -34,9 +36,11 @@ async function getFoodInformation(){
     $('#information').html("<p>Could not retrieve information.</p>");
   }
   finally{
+    $("#product_name").html(productTitle);
     productHtml += "</ul>";
     $("#information").html(productHtml);
   }
+  
   // images from DE database
   $('#product_images').html("");
 
