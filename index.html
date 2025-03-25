@@ -26,9 +26,6 @@
       }
     </script>
   
-  <script>
-
-  </script>
   
   <div id="content" class="welcome container">
   <h2>Some API output</h2>
@@ -39,6 +36,7 @@
   </p><hr>
   <input id="EAN" name="EAN" type=number min="1000000" max="99999999999999" step="1"
   value="4056489009207"> <label for="EAN">EAN</label>
+  <button id="clearEAN" onClick=clearEANfield();>Clear field</button>
   <button id="queryFood" onClick=getFoodInformation();>Find product</button>
   </div>
   <div class="food d-flex">

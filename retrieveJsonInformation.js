@@ -69,3 +69,7 @@ async function getFoodInformation(){
     $('#product_images').append(`<span class="img-lost">Kein Foto einer Nährwerttabelle.</span>`);
   }
 }
+
+function clearEANfield(){
+  $('#EAN').val("");
+}
