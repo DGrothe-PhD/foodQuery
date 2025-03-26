@@ -1,6 +1,29 @@
 var EAN = 4056489009207;
 $('#EAN').change(function() { window.EAN = this.value;});
 
+function tryAddImage(jsonObject){
+  const args = Array.prototype.slice.call(arguments, 1);
+    let queryHook = jsonObject;
+    if(args.length<3){
+      $('#product_images').append(`<span class="img-lost">Skriptfehler. `
+       + `Syntax: tryAddImage(imageHook, "nutrition", "display","de").</span>`);
+      return;
+    }
+    if(!jsonObject[args[0]] || !jsonObject[args[0]][args[1]]){
+      $('#product_images').append(`<span class="img-lost">Kein Bild von ${args[0]}. </span>`);
+      return;
+    }
+    if(!jsonObject[args[0]][args[1]][args[2]]){
+      $('#product_images').append(`<span class="img-lost">Kein DE Bild von ${args[0]}. </span>`);
+      return;
+    }
+    $('#product_images').append(
+      `<img style="width:25%" `
+      + `src="${jsonObject[args[0]][args[1]][args[2]]}" alt="Bild der Verpackung"/>`
+    );
+}
+
+
 async function getFoodInformation(){
   window.EAN = document.getElementById("EAN").value;
   window.EAN = window.EAN.trim();
@@ -44,26 +67,15 @@ async function getFoodInformation(){
   // images from DE database
   $('#product_images').html("");
 
-  // Front image
   try{
-    $('#product_images').append(`<img style="width:25%" `
-    + `src="${imageHook["front"]["display"]["de"]}" alt="Bild der Verpackung"/>`);
-  }
-  catch(error){
-    $('#product_images').append(`<span class="img-lost">Foto der Vorderseite fehlt.</span>`);
-  }
+    // Front image
+    tryAddImage(imageHook, "front", "display","de");
+
   // Ingredients
-  try{
-    $('#product_images').append(`<img style="width:25%" `
-    + `src="${imageHook["ingredients"]["display"]["de"]}" alt="Bild der Verpackung"/>`);
-  }
-  catch(error){
-    $('#product_images').append(`<span class="img-lost">Foto der Zutatenliste fehlt.</span>`);
-  }
+    tryAddImage(imageHook, "ingredients", "display","de");
+
   // Nutrition image
-  try{
-    $('#product_images').append(`<img style="width:25%" `
-    + `src="${imageHook["nutrition"]["display"]["de"]}" alt="Bild der Verpackung"/>`);
+    tryAddImage(imageHook, "nutrition", "display","de");
   }
   catch(error){
     $('#product_images').append(`<span class="img-lost">Kein Foto einer Nährwerttabelle.</span>`);
