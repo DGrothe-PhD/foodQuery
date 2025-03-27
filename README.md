@@ -2,4 +2,9 @@
 
 * Using Open Food Facts database
 * Started for practicing open APIs
-* Code to be uploaded soon
+* Translation in DE, EN, FR
+
+## Ideas 💡🎯
+* Obtain EN, FR local images where available
+* Attach screenreader
+* Meal calculator for customized multi-ingredients recipes
