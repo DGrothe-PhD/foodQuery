@@ -15,6 +15,7 @@ function setDefaultLanguage(){
     for (let link of links) {
       if (link.getAttribute("hreflang") === defaultLanguage) {
         window.location.href = link.getAttribute("href");
+        selectedLang = defaultLanguage;
         return;
       }
       // Fallback for any language this coder doesn't speak.
@@ -24,6 +25,7 @@ function setDefaultLanguage(){
     }
     if(fallBackLink != null){
       window.location.href = fallBackLink.getAttribute("href");
+      selectedLang = "en";
     }
   }
   catch(error){
