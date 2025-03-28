@@ -13,10 +13,10 @@
     <label for="language">Diese Seite in einer anderen Sprache:</label>
     <select id="language">
       <option lang="de" value="de">Deutsch</option>
-      <option lang="en" value="en">English</option>
+      <option lang="en" value="en" selected>English</option>
       <option lang="fr" value="fr">Français</option>
     </select>
-    <button onClick=switchLanguage(event);>Ändern</button>
+    <button onClick="switchLanguage(event);">Ändern</button>
   </form>
   
   <script src="switchLanguage.js"></script>
@@ -24,7 +24,7 @@
     <link rel="alternate" hreflang="de" href="content_DE.html"/>
     <link rel="alternate" hreflang="fr" href="content_FR.html"/>
   </head>
-  <body>
+  <body onload="setDefaultLanguage();">
 
   <h1>Open APIs</h1>
   <div id="content" class="welcome container">
