@@ -33,8 +33,10 @@
   <p>&nbsp;<br>
     <img width="50%" src="./assets/FoodEmojis.png" alt="Guten Appetit!">
   </p><hr>
-  <input id="EAN" name="EAN" type=number min="1000000" max="99999999999999" step="1"
-  value="4056489009207"> <label for="EAN">EAN</label>
+  <input id="EAN" name="EAN" type="number" pattern="[0-9]+" min="1000000" max="99999999999999" step="1"
+    value="4056489009207"
+    onkeypress="return event.charCode>=48 && event.charCode<=57" required/>
+  <label for="EAN">EAN</label>
   <button id="clearEAN" onClick=clearEANfield();>
     <span lang="de">Feld leeren</span>
   </button>
