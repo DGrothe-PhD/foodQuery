@@ -31,15 +31,30 @@ function tryAddImage(jsonObject){
     $('#product_images').append(`<span class="img-lost">No image of ${args[0]}. </span>`);
     return;
   }
+  
   $('#product_images').append(
-    `<img style="width:25%" `
+    `<img class="product-img" style="width:25%;cursor:pointer;" `
     + `src="${jsonObject[args[0]][args[1]]["de"]}" alt="Bild der Verpackung"/>`
   );
+  // Handler registrieren (falls mehrfach Bilder geladen werden, vorher alte entfernen)
+  $('#product_images').off('click', '.product-img').on('click', '.product-img', function() {
+    $('#lightbox-img').attr('src', $(this).attr('src'));
+    $('#img-lightbox').fadeIn(150);
+  });
+  
+  $('#lightbox-close, #img-lightbox').off('click').on('click', function(e){
+    // Schließen nur, wenn nicht auf das Bild geklickt
+    if(e.target === this || e.target.id === "lightbox-close") {
+      $('#img-lightbox').fadeOut(150);
+      $('#lightbox-img').attr('src', '');
+    }
+  });
 }
 
 const defaultProductTitle = {"de": "Ohne Namen", "en": "No Name", "fr": "Pas de nom"};
 const nutriments = {"de": "Nährwerte", "en": "Nutriments", "fr": "Informations nutritionnelles"};
 const ingredients = {"de": "Zutaten", "en": "Ingredients", "fr": "Ingrédients"};
+
 
 function ignUndef(text){
   if(String(text).indexOf("undefined") >-1){

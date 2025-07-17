@@ -3,28 +3,32 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Food query</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="./styles.css">
+    <!--
     <link rel="stylesheet" 
     href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="./styles.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    
+    -->
+  
+    <link rel="alternate" hreflang="en" href="content_EN.html"/>
+    <link rel="alternate" hreflang="de" href="content_DE.html"/>
+    <link rel="alternate" hreflang="fr" href="content_FR.html"/>
+  <script src="./switchLanguage.js"></script>
+  </head>
+  <body>
   <form action="" method="get">
-    <label for="language">Diese Seite in einer anderen Sprache:</label>
+    <label for="language">Sélectionnez une autre language:</label>
     <select id="language">
       <option lang="de" value="de">Deutsch</option>
       <option lang="en" value="en">English</option>
       <option lang="fr" value="fr" selected>Français</option>
     </select>
-    <button onClick=switchLanguage(event);>OK</button>
+    <button onClick="switchLanguage(event);">OK</button>
   </form>
-  
-    <link rel="alternate" hreflang="en" href="content_EN.html"/>
-    <link rel="alternate" hreflang="de" href="content_DE.html"/>
-    <link rel="alternate" hreflang="fr" href="content_FR.html"/>
-  <script src="switchLanguage.js"></script>
-  </head>
-  <body>
-
   <h1>Open APIs</h1>
   <div id="content" class="welcome container">
   <h2><span lang="fr">Requête publique API</span></h2>
@@ -37,10 +41,10 @@
     value="4056489009207"
     onkeypress="return event.charCode>=48 && event.charCode<=57" required/>
   <label for="EAN">EAN</label>
-  <button id="clearEAN" onClick=clearEANfield();>
+  <button id="clearEAN" onClick="clearEANfield();">
     <span lang="fr">Vider le numéro</span>
   </button>
-  <button id="queryFood" onClick=getFoodInformation();>
+  <button id="queryFood" onClick="getFoodInformation();">
     <span lang="fr">Trouver l'article</span>
   </button>
   </div>
@@ -49,6 +53,10 @@
     <div id="information"></div>
   </div>
   <div id="product_images" class="d-flex"></div>
+  <div id="img-lightbox" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:1000;background:rgba(0,0,0,0.8);justify-content:center;align-items:center;">
+  <span style="position:absolute;top:30px;right:50px;font-size:2em;color:white;cursor:pointer;" id="lightbox-close">&times;</span>
+  <img id="lightbox-img" src="" style="max-width:90vw;max-height:85vh;box-shadow:0 0 12px #fff;border-radius:8px"/>
+  </div>
   <div id="imageTakenMyself" class="d-flex"></div>
   
   <script src="./retrieveJsonInformation.js"></script>

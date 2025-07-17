@@ -17,8 +17,9 @@
 *{font-family: Bierstadt, Tahoma, Helvetica, sans-serif;}
 
 div {
-      padding-top:1em;
-      padding-bottom:1em;
+  padding-top:1em;
+  padding-bottom:1em;
+  margin:2em;
 }
 button, img, .img-lost{
   margin-left:1em;
