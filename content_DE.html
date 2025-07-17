@@ -32,8 +32,8 @@
   <p>&nbsp;<br>
     <img width="50%" src="./assets/FoodEmojis.png" alt="Guten Appetit!">
   </p><hr>
-  <input id="EAN" name="EAN" type="number" pattern="[0-9]+" min="1000000" max="99999999999999" step="1"
-    value="4056489009207"
+  <input id="EAN" name="EAN" type="tel" pattern="[0-9]+" minlength="1000000" maxlength="99999999999999" step="1"
+    value="4056489009207" inputmode="numeric"
     onkeypress="return event.charCode>=48 && event.charCode<=57" required/>
   <label for="EAN">EAN</label>
   <button id="clearEAN" onClick="clearEANfield();">
@@ -56,9 +56,6 @@
   
   <script src="./retrieveJsonInformation.js"></script>
 
-  <!--# product: ingredients_text_de, generic_name_de, product_name_de, serving_size, serving_quantity, nutriments
-  selected_images: front: display: de <jpg>
-  -->
   </div>
   </body>
 </html>
