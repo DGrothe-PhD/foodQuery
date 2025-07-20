@@ -6,12 +6,13 @@ function tryAddImage(jsonObject){
   let imageLocale = selectedLang.slice(0,2).toLowerCase();
   const args = Array.prototype.slice.call(arguments, 1);
   let queryHook = jsonObject;
+  // Bad case: too few arguments
   if(args.length<2){
     $('#product_images').append(`<span class="img-lost">Skriptfehler. `
      + `Syntax: tryAddImage(imageHook, "nutrition", "display").</span>`);
     return;
   }
-  //
+  // Bad case: Can't get subsubentry of that Json. Typically no pictures uploaded yet.
   if(!jsonObject[args[0]] || !jsonObject[args[0]][args[1]]){
     $('#product_images').append(`<span class="img-lost">Kein Bild von ${args[0]}. </span>`);
     return;
@@ -19,23 +20,25 @@ function tryAddImage(jsonObject){
   // try to retrieve locale image
   if(imageLocale != "de"){
     if(jsonObject[args[0]][args[1]][imageLocale]){
+      // Got some French or English picture? Cool.
       $('#product_images').append(
-        `<img style="width:25%" `
+        `<img class="product-img" style="width:25%" `
         + `src="${jsonObject[args[0]][args[1]][imageLocale]}" alt="Bild der Verpackung"/>`
       );
-      return;
     }
   }
-  // DE fallback routine
-  if(!jsonObject[args[0]][args[1]]["de"]){
+  // DE fallback: check first.
+  else if(!jsonObject[args[0]][args[1]]["de"]){
     $('#product_images').append(`<span class="img-lost">No image of ${args[0]}. </span>`);
     return;
   }
+  else {
+    $('#product_images').append(
+      `<img class="product-img" style="width:25%;cursor:pointer;" `
+      + `src="${jsonObject[args[0]][args[1]]["de"]}" alt="Bild der Verpackung"/>`
+    );
+  }
   
-  $('#product_images').append(
-    `<img class="product-img" style="width:25%;cursor:pointer;" `
-    + `src="${jsonObject[args[0]][args[1]]["de"]}" alt="Bild der Verpackung"/>`
-  );
   // Handler registrieren (falls mehrfach Bilder geladen werden, vorher alte entfernen)
   $('#product_images').off('click', '.product-img').on('click', '.product-img', function() {
     $('#lightbox-img').attr('src', $(this).attr('src'));
