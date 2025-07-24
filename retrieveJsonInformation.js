@@ -66,19 +66,41 @@ function ignUndef(text){
   return text;
 }
 
+function parseWithLeadingZeros(some_input) {
+  let result = "";
+  for(j=0;j<some_input.length;j++){
+    if(some_input[j] == '0'){
+    result += '0';
+    }
+    else break;
+  }
+  return result + parseInt(some_input);
+}
+
 async function getFoodInformation(){
   selectedLang = document.getElementById("language").value;
+  let productTitle = `${defaultProductTitle[selectedLang]}`;
+  let productHtml = "<ul>";
   window.EAN = document.getElementById("EAN").value;
   window.EAN = window.EAN.trim();
+  if(!parseInt(window.EAN)){
+    productHtml = `<p>Article not found.</p>`;
+    $("#product_name").html(`<h3>${productTitle}</h3>`);
+    $("#information").html(productHtml);
+    return;
+  }
+  
+  window.EAN = parseWithLeadingZeros(window.EAN);
+	
+  // clean EAN so now let's go.
   let URL = `https://world.openfoodfacts.org/api/v3/product/${window.EAN}.json`;
   let foodJson = await loadJson(URL);
   
   // list of product information
   // fallback if article doesn't exist or no German name given
-  let productTitle = `${defaultProductTitle[selectedLang]}`;
-  let productHtml = "<ul>";
   let hook = null;
   let imageHook = null;
+  let hasFoundData = true;
   try{
     hook = foodJson["product"];
     if($('#EAN').val() == 4056489009207){
@@ -116,6 +138,7 @@ async function getFoodInformation(){
     if(error instanceof TypeError){
       productHtml += `<p>Article not found.</p>`;
     }
+    hasFoundData = false;
   }
   finally{
     $("#product_name").html(`<h3>${productTitle}</h3>`);
@@ -127,6 +150,7 @@ async function getFoodInformation(){
   $('#product_images').html("");
 
   try{
+    if(!hasFoundData){return;}
     // Front image
     tryAddImage(imageHook, "front", "display","de");
 
