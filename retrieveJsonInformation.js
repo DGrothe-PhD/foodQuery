@@ -1,6 +1,25 @@
 var EAN = 4056489009207;
 $('#EAN').change(function() { window.EAN = this.value;});
 
+// Parse URL for ?EAN=xxxxxxx
+function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const eanFromUrl = getQueryParam('EAN');
+  if (eanFromUrl) {
+    const input = document.getElementById("EAN");
+    if (input) {
+      input.value = eanFromUrl;
+      if (typeof getFoodInformation === 'function') {
+        getFoodInformation();
+      }
+    }
+  }
+});
+
 function tryAddImage(jsonObject){
   selectedLang = document.getElementById("language").value;
   let imageLocale = selectedLang.slice(0,2).toLowerCase();
