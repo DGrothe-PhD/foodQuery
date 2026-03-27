@@ -33,10 +33,20 @@ input{
 .food{
   background-color: papayawhip;
 }
-.nutriments, .listofnumbers {
+.nutriments {
   font-style:italic;
   font-size: 12px;
   column-count: 3;
+}
+
+.listofnumbers {
+  font-weight: bold;
+  font-size: 16px;
+  column-count: 3;
+}
+
+.listofnumbers ul{
+  font-weight: normal;
 }
 
 .lightbox-div{
