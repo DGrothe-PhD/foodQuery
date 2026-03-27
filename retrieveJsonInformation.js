@@ -4,7 +4,7 @@ $('#EAN').change(function() { window.EAN = this.value;});
 // Parse URL for ?EAN=xxxxxxx
 function getQueryParam(param) {
   const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get(param);
+  return urlParams.get(param) ?? urlParams.get(param.toLowerCase());
 }
 
 window.addEventListener('DOMContentLoaded', () => {
