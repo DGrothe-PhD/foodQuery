@@ -13,14 +13,10 @@
  /* Small screen / tablet / 760px to 991px */
 @media (max-width: 991px) {
   font-size:2em;
-  
-  
 }
 
 /* Smaller screen / tablet+phone / 480px to 759px */
 @media (max-width: 759px) {
-  *{font-size:2em;}
-  
   .nutriments {
     column-count: 1;
   }
@@ -32,8 +28,6 @@
 
 /* Extra small screen / smartphone / 280px to 479px */
 @media (max-width: 479px) {
-  *{font-size:2em;}
-  
   .nutriments {
     column-count: 1;
   }
