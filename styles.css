@@ -1,16 +1,46 @@
+.nutriments {
+  font-style:italic;
+  font-size: 12px;
+  column-count: 3;
+}
+
+.listofnumbers {
+  font-weight: bold;
+  font-size: 16px;
+  column-count: 3;
+}
+
  /* Small screen / tablet / 760px to 991px */
 @media (max-width: 991px) {
   font-size:2em;
+  
+  
 }
 
 /* Smaller screen / tablet+phone / 480px to 759px */
 @media (max-width: 759px) {
-  font-size:2em;
+  *{font-size:2em;}
+  
+  .nutriments {
+    column-count: 1;
+  }
+
+  .listofnumbers {
+    column-count: 1;
+  }
 }
 
 /* Extra small screen / smartphone / 280px to 479px */
 @media (max-width: 479px) {
-  font-size:2em;
+  *{font-size:2em;}
+  
+  .nutriments {
+    column-count: 1;
+  }
+
+  .listofnumbers {
+    column-count: 1;
+  }
 }
 /* Font for all */
 /**{font-family:Aptos,sans-serif}*/
@@ -33,17 +63,7 @@ input{
 .food{
   background-color: papayawhip;
 }
-.nutriments {
-  font-style:italic;
-  font-size: 12px;
-  column-count: 3;
-}
 
-.listofnumbers {
-  font-weight: bold;
-  font-size: 16px;
-  column-count: 3;
-}
 
 .listofnumbers ul{
   font-weight: normal;
